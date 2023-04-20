@@ -1,0 +1,18 @@
+<?php
+// Lando database configuration. Use drupal7 or drupal8 depending on the recipe
+// and match the collation utf8_general_ci or utf8mb4_general_ci.
+if (isset($_ENV['LANDO_DOMAIN'])) {
+  $databases['default']['default'] = array(
+    'driver' => 'mysql',
+    'database' => 'drupal9',
+    'username' => 'drupal9',
+    'password' => 'drupal9',
+    'host' => 'database',
+    'prefix' => '',
+    'collation' => 'utf8_general_ci',
+  );
+  $config['raven.settings']['environment'] = 'local';
+}
+// Prevent aggregation locally.
+$config['system.performance']['css']['preprocess'] = FALSE;
+$config['system.performance']['js']['preprocess'] = FALSE;

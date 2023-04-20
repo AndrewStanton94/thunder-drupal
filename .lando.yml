@@ -1,0 +1,37 @@
+name: thunder
+recipe: drupal9 # Or other recipe being used
+domain: thunder.local.com #(site.local.com)
+config:
+  webroot: docroot
+  php: 7.4
+  via: nginx:1.16
+  database: mysql:5.7
+  drush: 8.3.5
+  xdebug: true
+  config:
+    vhosts: .lando/nginx/thunder.local.com
+    php: .lando/php/php.ini
+  tooling:
+    drush:
+      service: appserver
+      cmd: drush --root=/app/docroot -l thunder.local.com
+services:
+  appserver:
+    composer_version: 1.10.22 # Change this if the site uses a specific version
+    run_as_root:
+      - .lando/scripts/init.sh
+    overrides:
+      environment:
+        PHP_IDE_CONFIG: "serverName=localhost"
+  pma:
+    type: phpmyadmin:5.0
+    hosts: [ database ]
+proxy:
+  appserver_nginx:
+    - thunder.local.com
+  pma:
+    - pma.thunder.local.com
+events:
+  post-db-import:
+    - echo "Clearing site cache."
+    - appserver: cd /app/docroot && drush cr > /dev/null

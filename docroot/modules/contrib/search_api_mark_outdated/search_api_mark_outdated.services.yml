@@ -1,0 +1,9 @@
+services:
+  search_api_mark_outdated.manager:
+    class: Drupal\search_api_mark_outdated\SearchApiManager
+    arguments: ['@entity_type.manager', '@state']
+  search_api_mark_outdated.search_api_subscriber:
+    class: Drupal\search_api_mark_outdated\EventSubscriber\SearchApiSubscriber
+    arguments: ['@search_api_mark_outdated.manager']
+    tags:
+      - { name: event_subscriber }

@@ -1,0 +1,10 @@
+name: 'Provides config that depends on Test two'
+type: module
+package: Testing
+dependencies:
+  - config_selector:config_selector_test_two
+
+# Information added by Drupal.org packaging script on 2022-03-29
+version: '8.x-2.2'
+project: 'config_selector'
+datestamp: 1648545222

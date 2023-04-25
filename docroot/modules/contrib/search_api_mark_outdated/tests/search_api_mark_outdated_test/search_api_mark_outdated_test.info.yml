@@ -1,0 +1,13 @@
+name: 'Search API Mark Outdated Test'
+type: module
+package: Testing
+dependencies:
+  - search_api:search_api
+  - search_api:search_api_test_db
+  - search_api_mark_outdated:search_api_mark_outdated
+  - drupal:views
+
+# Information added by Drupal.org packaging script on 2022-11-17
+version: '1.0.0-beta2'
+project: 'search_api_mark_outdated'
+datestamp: 1668697091

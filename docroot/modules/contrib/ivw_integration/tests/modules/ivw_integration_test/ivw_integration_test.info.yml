@@ -1,0 +1,15 @@
+name: 'IVW integration test'
+type: module
+description: 'Support module for IVW integration tests.'
+package: Testing
+dependencies:
+  - ivw_integration:ivw_integration
+  - drupal:field
+  - drupal:node
+  - drupal:block
+  - drupal:taxonomy
+
+# Information added by Drupal.org packaging script on 2022-10-31
+version: '8.x-2.5'
+project: 'ivw_integration'
+datestamp: 1667212182

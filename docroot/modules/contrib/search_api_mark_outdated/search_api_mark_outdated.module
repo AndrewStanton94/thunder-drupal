@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for search_api_mark_outdated module.
+ *
+ * @DCG
+ * This file is no longer required in Drupal 8.
+ * @see https://www.drupal.org/node/2217931
+ */
+
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\search_api\Plugin\search_api\datasource\ContentEntity;
+
+/**
+ * Implements hook_entity_update().
+ */
+function search_api_mark_outdated_entity_update(EntityInterface $entity): void {
+  // Check if the entity is a content entity.
+  if (!($entity instanceof ContentEntityInterface) || $entity->search_api_skip_tracking) {
+    return;
+  }
+
+  $indexes = ContentEntity::getIndexesForEntity($entity);
+  if (!$indexes) {
+    return;
+  }
+
+  \Drupal::service('search_api_mark_outdated.manager')
+    ->entityUpdate($indexes, $entity);
+}

@@ -1,0 +1,154 @@
+<?php
+
+/**
+ * @file
+ * Adds a 'vgwort_counter_id' field to nodes.
+ */
+
+use Drupal\Core\Entity\ContentEntityTypeInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\EntityViewModeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Implements hook_theme().
+ */
+function vgwort_theme(): array {
+  return [
+    'field__vgwort_counter_id' => [
+      'base hook' => 'field',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function vgwort_entity_base_field_info(EntityTypeInterface $entity_type): array {
+  $fields = [];
+
+  if (_vgwort_entity_type_has_counter_id($entity_type->id())) {
+    $fields['vgwort_counter_id'] = BaseFieldDefinition::create('vgwort_counter_id')
+      ->setLabel(t('VG Wort counter ID'))
+      ->setComputed(TRUE)
+      ->setDisplayConfigurable('form', FALSE)
+      // Note as we're adding this to the hidden region there is no way to
+      // default the label to be hidden which would be expected. Also the
+      // field__vgwort_counter_id inline template completely disrespects this
+      // setting  and a label will not be printed regardless of this setting.
+      // @todo Can we hide the label display somehow?
+      ->setDisplayOptions('view', [
+        'region' => 'hidden',
+        'type' => 'vgwort_counter_id_image',
+      ])
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  return $fields;
+}
+
+/**
+ * Implements hook_entity_storage_load().
+ */
+function vgwort_entity_storage_load(array $entities): void {
+  // @todo decide if this is the correct solution. There is no way for a
+  //   computed field to add cache tags to an entity that works for both
+  //   rendered and Json:API. JsonAPI can be solved by doing
+  //   https://www.drupal.org/project/drupal/issues/2997123 but that does not
+  //   work for rendered entities. An alternative fix is to add a configuration
+  //   listener that clears caches when the configuration is changed.
+  $entity = reset($entities);
+  if ($entity instanceof EntityInterface) {
+    if (!_vgwort_entity_type_has_counter_id($entity->getEntityTypeId())) {
+      return;
+    }
+  }
+  $config = \Drupal::config('vgwort.settings');
+  /** @var \Drupal\node\NodeInterface $entity */
+  foreach ($entities as $entity) {
+    $entity->addCacheableDependency($config);
+  }
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function vgwort_entity_update(EntityInterface $entity): void {
+  if (_vgwort_entity_type_has_counter_id($entity->getEntityTypeId())) {
+    \Drupal::service('vgwort.entity_queuer')->queueEntity($entity);
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function vgwort_entity_insert(EntityInterface $entity): void {
+  vgwort_entity_update($entity);
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function vgwort_entity_delete(EntityInterface $entity): void {
+  // Clean up the map table.
+  if ($entity->getEntityType() instanceof ContentEntityTypeInterface) {
+    \Drupal::service('vgwort.entity_job_mapper')->removeEntity($entity);
+  }
+}
+
+/**
+ * Implements hook_entity_view_mode_delete().
+ */
+function vgwort_entity_view_mode_delete(EntityViewModeInterface $view_mode) {
+  [$entity_type, $display_mode_name] = explode('.', $view_mode->id(), 2);
+  $config = \Drupal::configFactory()->getEditable('vgwort.settings');
+  if ($config->get("entity_types.$entity_type.view_mode") === $display_mode_name) {
+    $config->set("entity_types.$entity_type.view_mode", 'default')->save();
+  }
+}
+
+/**
+ * Determines if the entity type is configured to have a counter ID.
+ *
+ * @param string $entity_type_id
+ *   The entity type ID.
+ *
+ * @return bool
+ *   TRUE if the entity type has the counter ID field. FALSE if not.
+ */
+function _vgwort_entity_type_has_counter_id(string $entity_type_id): bool {
+  $entity_types = \Drupal::config('vgwort.settings')->get('entity_types') ?? [];
+  return isset($entity_types[$entity_type_id]);
+}
+
+/**
+ * @param string $entity_type
+ *   The entity that has the entity reference field.
+ * @param string|null $field_name
+ *   The field name.
+ */
+function _vgwort_add_entity_reference_to_participant_map(string $entity_type, string $field_name = NULL): void {
+  if (!\Drupal::entityTypeManager()->hasDefinition($entity_type)) {
+    throw new \RuntimeException("The $entity_type does not exist");
+  }
+
+  $config = \Drupal::service('config.factory')->getEditable('vgwort.settings');
+  $entity_types = $config->get('entity_types');
+  if (!isset($entity_types[$entity_type])) {
+    $entity_types[$entity_type] = [
+      'view_mode' => 'full',
+      'fields' => [],
+    ];
+  }
+
+  if ($field_name !== NULL) {
+    if (!isset(\Drupal::service('entity_field.manager')->getFieldMapByFieldType('entity_reference')[$entity_type][$field_name])) {
+      throw new \RuntimeException("The $entity_type does not have the field $field_name or the field is not an entity reference");
+    }
+    if (!in_array($field_name, $entity_types[$entity_type]['fields'], TRUE)) {
+      $entity_types[$entity_type]['fields'][] = $field_name;
+    }
+  }
+  $config->set('entity_types', $entity_types)->save();
+}

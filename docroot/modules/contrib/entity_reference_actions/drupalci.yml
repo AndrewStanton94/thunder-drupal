@@ -1,0 +1,38 @@
+build:
+  environment:
+    startcontainers:
+      runcontainers:
+    create_db:
+      dbcreate:
+  codebase:
+    assemble_codebase:
+      checkout_core:
+      checkout.contrib:
+      fetch:
+      patch:
+      composer.core_install:
+      gather_dependencies:
+      update_build:
+      yarn_install:
+      start_phantomjs:
+  assessment:
+    validate_codebase:
+      phplint:
+      container_composer:
+      host_command:
+        commands:
+          - 'cd modules/contrib/inline_entity_form; sudo -u www-data curl "https://www.drupal.org/files/issues/2022-09-22/47-8.diff" | sudo -u www-data patch -p1'
+      csslint:
+        halt-on-fail: true
+      eslint:
+        halt-on-fail: false
+      phpcs:
+        halt-on-fail: true
+    testing:
+      run_tests.standard:
+        types: 'PHPUnit-Unit,PHPUnit-Kernel,PHPUnit-Functional'
+      run_tests.js:
+        concurrency: 15
+        types: 'PHPUnit-FunctionalJavascript'
+      # There are no nightwatch tests yet.
+      # nightwatchjs:

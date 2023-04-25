@@ -1,0 +1,10 @@
+xymatic_migrate.settings:
+  type: config_object
+  label: 'Xymatic migrate settings'
+  mapping:
+    legacy_media_type:
+      type: string
+      label: 'Media type'
+    legacy_video_id_jsonpath:
+      type: string
+      label: 'JSONPath to video ID'

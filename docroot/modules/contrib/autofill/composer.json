@@ -1,0 +1,8 @@
+{
+  "name": "drupal/autofill",
+  "type": "drupal-module",
+  "description": "A field can automatically be autofilled while typing into another one",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev"
+}

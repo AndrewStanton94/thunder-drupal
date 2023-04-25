@@ -1,0 +1,5 @@
+row-class:
+  js:
+    js/row-class.js: {}
+  dependencies:
+    - core/drupal

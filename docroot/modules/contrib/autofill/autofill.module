@@ -1,0 +1,139 @@
+<?php
+
+/**
+ * @file
+ * Contains autofill.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Field\WidgetInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+
+/**
+ * Implements hook_help().
+ */
+function autofill_help(string $route_name, RouteMatchInterface $route_match): string {
+  switch ($route_name) {
+    // Main module help for the autofill module.
+    case 'help.page.autofill':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('A field can automatically be autofilled while typing into another one.') . '</p>';
+      return $output;
+
+    default:
+      return '';
+  }
+}
+
+/**
+ * Implements hook_field_widget_third_party_settings_form().
+ */
+function autofill_field_widget_third_party_settings_form(WidgetInterface $plugin, FieldDefinitionInterface $field_definition, string $form_mode, array $form, FormStateInterface $form_state): array {
+  $element = [];
+
+  if ($field_definition->getType() === 'string') {
+    $field_name = $field_definition->getName();
+    $available_source_fields = _autofill_get_available_source_fields_as_options($form, $field_name);
+
+    $element['enabled'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Enable Autofill from another field'),
+      '#disabled' => !empty($available_source_fields) ? FALSE : TRUE,
+      '#default_value' => !empty($available_source_fields) ? $plugin->getThirdPartySetting('autofill', 'enabled') : NULL,
+    ];
+
+    // Check if there are available source fields.
+    if (!empty($available_source_fields)) {
+      $element['source_field'] = [
+        '#type' => 'select',
+        '#title' => t('Autofill source field'),
+        '#default_value' => $plugin->getThirdPartySetting('autofill', 'source_field'),
+        '#options' => $available_source_fields,
+        '#states' => [
+          'visible' => [
+            ':input[name="fields[' . $field_name . '][settings_edit_form][third_party_settings][autofill][enabled]"]' => ['checked' => TRUE],
+          ],
+        ],
+      ];
+    }
+    else {
+      $element['source_field'] = ['#markup' => t('No source field available. Please create a text field from where this field should be autofilled.')];
+    }
+  }
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_widget_settings_summary_alter().
+ */
+function autofill_field_widget_settings_summary_alter(array &$summary, array $context): void {
+  /** @var \Drupal\Core\Field\WidgetInterface $widget */
+  $widget = $context['widget'];
+  if ($widget->getThirdPartySetting('autofill', 'enabled') && $source_field = $widget->getThirdPartySetting('autofill', 'source_field')) {
+    $summary[] = t('Autofill from: @source_field', ['@source_field' => $source_field]);
+  }
+}
+
+/**
+ * Build an option list of available autofill source fields.
+ *
+ * @param array $form
+ *   The currently processed form.
+ * @param string $current_field_name
+ *   The currently process field name.
+ *
+ * @return array
+ *   The field name and field label as a key/value pair.
+ */
+function _autofill_get_available_source_fields_as_options(array $form, string $current_field_name): array {
+  $options = [];
+
+  $entity_type = $form['#entity_type'];
+  $bundle = $form['#bundle'];
+
+  $field_storage_definitions = \Drupal::service('entity_field.manager')->getFieldStorageDefinitions($entity_type);
+  // Filter the available fields by the support field type and make sure it is
+  // not the currently processed field.
+  $available_entity_fields = array_filter($field_storage_definitions, fn(FieldStorageDefinitionInterface $field_storage): bool => $field_storage->getName() !== $current_field_name && $field_storage->getType() === 'string');
+
+  $form_fields = array_intersect_key($available_entity_fields, array_flip($form['#fields']));
+
+  /** @var \Drupal\Core\Field\FieldStorageDefinitionInterface $field */
+  foreach ($form_fields as $field) {
+    $label = $field->getLabel();
+
+    // Load labels from field_config for regular fields.
+    $field_configs = \Drupal::entityTypeManager()
+      ->getStorage('field_config')
+      ->loadByProperties([
+        'field_name' => $field->getName(),
+        'entity_type' => $entity_type,
+        'bundle' => $bundle,
+      ]);
+    /** @var \Drupal\field\FieldConfigInterface $field_config */
+    if ($field_config = array_pop($field_configs)) {
+      $label = $field_config->getLabel();
+    }
+    $options[$field->getName()] = $label;
+  }
+
+  return $options;
+}
+
+/**
+ * Implements hook_field_widget_single_element_form_alter().
+ */
+function autofill_field_widget_single_element_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
+  /** @var \Drupal\Core\Field\WidgetInterface $widget */
+  $widget = $context['widget'];
+  /** @var \Drupal\Core\Field\FieldDefinitionInterface $field_definition */
+  $field_definition = $context['items']->getFieldDefinition();
+  if ($widget->getThirdPartySetting('autofill', 'enabled') && $source_field = $widget->getThirdPartySetting('autofill', 'source_field')) {
+    $element['#attached']['library'][] = 'autofill/autofill';
+    $element['#attached']['drupalSettings']['autofill']['field_mapping'][$field_definition->getName()] = $source_field;
+  }
+}

@@ -1,0 +1,6 @@
+vgwort.settings:
+  title: 'VG Wort settings'
+  parent: system.admin_config_system
+  description: 'Configure VG Wort settings.'
+  route_name: vgwort.settings
+  weight: 100

@@ -1,0 +1,6 @@
+autofill:
+  js:
+    js/autofill.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

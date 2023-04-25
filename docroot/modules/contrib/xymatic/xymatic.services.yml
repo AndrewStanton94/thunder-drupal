@@ -1,0 +1,12 @@
+services:
+  xymatic.video_fetcher:
+    class: Drupal\xymatic\VideoFetcher
+    arguments: ['@http_client', '@config.factory', '@cache.xymatic_video']
+
+  cache.xymatic_video:
+    class: Drupal\Core\Cache\CacheBackendInterface
+    tags:
+      - { name: cache.bin }
+    factory: cache_factory:get
+    arguments:
+      - xymatic_video

@@ -1,0 +1,7 @@
+views.field.search_api_mark_outdated_state_field:
+  type: views_field
+  label: 'A field that indicates if a search result item might be outdated'
+  mapping:
+    add_row_class:
+      type: boolean
+      label: 'Add row class'

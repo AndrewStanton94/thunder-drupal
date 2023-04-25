@@ -1,0 +1,21 @@
+{
+    "name": "drupal/vgwort",
+    "description": "Adds VG Wort integration using publisher defined keys.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/advancedqueue": "^1.0@RC",
+        "php": ">=7.4.0"
+    },
+    "require-dev": {
+        "drush/drush": "^11.0",
+        "drupal/graphql": "^4.4"
+    },
+    "extra": {
+        "drush": {
+            "services": {
+                "drush.services.yml": "^11"
+            }
+        }
+    }
+}

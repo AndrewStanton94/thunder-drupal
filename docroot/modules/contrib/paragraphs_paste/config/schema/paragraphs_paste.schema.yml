@@ -1,0 +1,18 @@
+paragraphs_paste_third_party:
+  type: mapping
+  label: 'Schema for Paragraphs Paste options of Paragraphs Widget'
+  mapping:
+    enabled:
+      type: boolean
+      label: 'Copy & Paste area enabled'
+    property_path_mapping:
+      type: sequence
+      sequence:
+        type: string
+    custom_split_method:
+      type: boolean
+    custom_split_method_regex:
+      type: string
+
+field.widget.third_party.paragraphs_paste:
+  type: paragraphs_paste_third_party

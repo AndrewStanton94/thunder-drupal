@@ -1,0 +1,13 @@
+name: Xymatic migrate
+description: 'Xymatic migrate module.'
+type: module
+package: Media
+core_version_requirement: ^9 || ^10
+configure: xymatic.settings
+dependencies:
+  - xymatic:xymatic
+
+# Information added by Drupal.org packaging script on 2023-04-14
+version: '1.0.0-beta3'
+project: 'xymatic'
+datestamp: 1681484864

@@ -1,0 +1,21 @@
+# Ideally the password would be stored in a config override in settings.php
+username: ''
+password: ''
+# According to VG Wort the prefix is always the same, but it changed in 2022 so
+# leaving in configuration. \Drupal\vgwort\Form\SettingsForm does not support
+# changing it.
+prefix: vgzm
+publisher_id: ''
+image_domain: ''
+registration_wait_days: 14
+queue_retry_time: 86400
+entity_types:
+  node:
+    view_mode: full
+test_mode: false
+legal_rights:
+  distribution: false
+  public_access: false
+  reproduction: false
+  declaration_of_granting: false
+  other_public_communication: false

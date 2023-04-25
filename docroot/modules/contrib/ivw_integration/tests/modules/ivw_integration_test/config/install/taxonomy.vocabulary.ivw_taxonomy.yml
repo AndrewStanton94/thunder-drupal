@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'ivw taxonomy'
+vid: ivw_taxonomy
+description: ''
+weight: 0

@@ -1,0 +1,5 @@
+xymatic_migrate.settings:
+  title: 'Migration'
+  parent: xymatic.settings
+  description: 'Manage xymatic migrate settings.'
+  route_name: xymatic_migrate.settings

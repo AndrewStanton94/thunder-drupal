@@ -1,0 +1,5 @@
+services:
+  ajax_response.subscriber.decorator:
+    class: Drupal\entity_reference_actions\EventSubscriber\SubRequestAjaxResponseSubscriber
+    decorates: ajax_response.subscriber
+    arguments: ['@ajax_response.subscriber.decorator.inner']

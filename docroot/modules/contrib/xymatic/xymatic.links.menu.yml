@@ -1,0 +1,5 @@
+xymatic.settings:
+  title: 'Xymatic settings'
+  parent: system.admin_config_media
+  description: 'Manage xymatic settings.'
+  route_name: xymatic.settings

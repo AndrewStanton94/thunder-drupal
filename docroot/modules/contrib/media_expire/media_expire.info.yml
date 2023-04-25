@@ -1,0 +1,12 @@
+name: 'Media Expire'
+description: 'Expires media assets.'
+type: module
+core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:media
+package: Media
+
+# Information added by Drupal.org packaging script on 2022-12-08
+version: '8.x-2.6'
+project: 'media_expire'
+datestamp: 1670511500

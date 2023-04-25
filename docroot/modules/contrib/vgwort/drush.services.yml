@@ -1,0 +1,6 @@
+services:
+  vgwort.commands:
+    class: \Drupal\vgwort\Commands\VgwortCommands
+    arguments: ['@entity_type.manager', '@vgwort.entity_queuer', '@datetime.time', '@entity.memory_cache', '@plugin.manager.advancedqueue_job_type']
+    tags:
+      - { name: drush.command }

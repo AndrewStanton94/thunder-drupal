@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.ivw_taxonomy.field_ivw_settings
+    - taxonomy.vocabulary.ivw_taxonomy
+  module:
+    - ivw_integration
+    - text
+id: taxonomy_term.ivw_taxonomy.default
+targetEntityType: taxonomy_term
+bundle: ivw_taxonomy
+mode: default
+content:
+  description:
+    type: text_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_ivw_settings:
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    type: ivw_integration_widget
+    region: content
+  name:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
+    third_party_settings: {  }
+hidden: {  }

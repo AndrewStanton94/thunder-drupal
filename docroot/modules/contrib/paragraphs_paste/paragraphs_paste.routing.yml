@@ -1,0 +1,15 @@
+paragraphs_paste.help:
+  path: '/paragraphs_paste/help'
+  defaults:
+    _controller: '\Drupal\paragraphs_paste\Controller\HelpController::pageHelp'
+    _title: 'Paragraphs Paste Help'
+  requirements:
+    _access: 'TRUE'
+
+paragraphs_paste.autocomplete.property_path:
+  path: '/admin/paragraphs_paste/autocomplete/property_path'
+  defaults:
+    _controller: '\Drupal\paragraphs_paste\Controller\PropertyPathAutocompleteController::handleAutocomplete'
+    _format: json
+  requirements:
+    _access: 'TRUE'

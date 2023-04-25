@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ivw_integration
+  theme:
+    - stark
+id: ivwcall
+theme: stark
+region: header
+weight: 0
+provider: null
+plugin: ivw_integration_call_block
+settings:
+  id: ivw_integration_call_block
+  label: 'IVW call'
+  provider: ivw_integration
+  label_display: visible
+visibility: {  }

@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * Database to mimic the installation of the VG Wort module.
+ */
+
+use Drupal\Core\Database\Database;
+
+$connection = Database::getConnection();
+
+// Set the schema version.
+$connection->merge('key_value')
+  ->condition('collection', 'system.schema')
+  ->condition('name', 'vgwort')
+  ->fields([
+    'collection' => 'system.schema',
+    'name' => 'vgwort',
+    'value' => 'i:8000;',
+  ])
+  ->execute();
+
+// Update core.extension.
+$extensions = $connection->select('config')
+  ->fields('config', ['data'])
+  ->condition('collection', '')
+  ->condition('name', 'core.extension')
+  ->execute()
+  ->fetchField();
+$extensions = unserialize($extensions, ['allowed_classes' => FALSE]);
+$extensions['module']['vgwort'] = 0;
+$connection->update('config')
+  ->fields([
+    'data' => serialize($extensions),
+  ])
+  ->condition('collection', '')
+  ->condition('name', 'core.extension')
+  ->execute();
+
+// Install VG Wort settings are they were for the first beta release.
+$settings = [
+  'prefix' => 'vgzm',
+  'publisher_id' => '',
+  'image_domain' => '',
+  'registration_wait_days' => 14,
+];
+$connection->insert('config')
+  ->fields([
+    'collection',
+    'name',
+    'data',
+  ])
+  ->values([
+    'collection' => '',
+    'name' => 'vgwort.settings',
+    'data' => serialize($settings),
+  ])
+  ->execute();

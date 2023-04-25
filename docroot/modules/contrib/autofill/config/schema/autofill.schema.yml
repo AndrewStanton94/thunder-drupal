@@ -1,0 +1,10 @@
+field.widget.third_party.autofill:
+  type: mapping
+  label: 'Autofill third party settings'
+  mapping:
+    enabled:
+      type: boolean
+      label: 'Enable the autofill functionality.'
+    source_field:
+      type: string
+      label: 'The source field from where to autofill.'

@@ -1,0 +1,9 @@
+name: 'Configuration Selector'
+type: module
+description: 'A utility module that enables different versions of optional configuration to be selected on module install.'
+core_version_requirement: ^9.3 || ^10
+
+# Information added by Drupal.org packaging script on 2022-03-29
+version: '8.x-2.2'
+project: 'config_selector'
+datestamp: 1648545222

@@ -1,0 +1,12 @@
+name: 'Paragraphs Paste'
+type: module
+description: 'Creates paragraphs from pasted content.'
+package: Paragraphs
+core_version_requirement: ^9 || ^10
+dependencies:
+  - paragraphs:paragraphs
+
+# Information added by Drupal.org packaging script on 2022-12-01
+version: '2.0.0-beta6'
+project: 'paragraphs_paste'
+datestamp: 1669903206

@@ -1,0 +1,13 @@
+name: IVW Tracking
+type: module
+description: 'IVW (SZM 2) tracking'
+package: Tracking
+core_version_requirement: ^9.2 || ^10
+
+dependencies:
+  - token:token
+
+# Information added by Drupal.org packaging script on 2022-10-31
+version: '8.x-2.5'
+project: 'ivw_integration'
+datestamp: 1667212182

@@ -1,0 +1,6 @@
+services:
+  xymatic_migrate.commands:
+    class: Drupal\xymatic_migrate\Commands\XymaticMigrateCommands
+    tags:
+      - { name: drush.command }
+    arguments: ['@entity_type.manager', '@config.factory']

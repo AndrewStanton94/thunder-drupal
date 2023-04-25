@@ -1,0 +1,5 @@
+xymatic.settings:
+  route_name: xymatic.settings
+  title: 'Global settings'
+  base_route: xymatic.settings
+

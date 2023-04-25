@@ -1,0 +1,7 @@
+services:
+  media_expire.commands:
+    class: Drupal\media_expire\Commands\MediaExpireCommands
+    arguments:
+      - '@media_expire.service'
+    tags:
+      - { name: drush.command }

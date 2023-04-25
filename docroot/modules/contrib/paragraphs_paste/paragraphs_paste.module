@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Contains hooks for paragraphs_paste module.
+ */
+
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Core\Field\WidgetInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\paragraphs\Plugin\Field\FieldWidget\ParagraphsWidget;
+use Drupal\paragraphs_paste\ParagraphsPasteHandler;
+
+/**
+ * Implements hook_field_widget_complete_form_alter().
+ */
+function paragraphs_paste_field_widget_complete_form_alter(array &$form, FormStateInterface $form_state, array $context) {
+  if ($context['widget']->getThirdPartySetting('paragraphs_paste', 'enabled')) {
+    \Drupal::service('class_resolver')
+      ->getInstanceFromDefinition(ParagraphsPasteHandler::class)
+      ->formAlter($form, $form_state, $context);
+  }
+}
+
+/**
+ * Implements hook_field_widget_third_party_settings_form().
+ */
+function paragraphs_paste_field_widget_third_party_settings_form(WidgetInterface $plugin, FieldDefinitionInterface $field_definition, $form_mode, $form, FormStateInterface $form_state) {
+  $elements = [];
+
+  if ($plugin instanceof ParagraphsWidget && $field_definition->getFieldStorageDefinition()->getCardinality() == FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED) {
+    $elements = ParagraphsPasteHandler::getThirdPartyForm($plugin, $field_definition->getName());
+  }
+
+  return $elements;
+}
+
+/**
+ * Implements hook_field_widget_settings_summary_alter().
+ */
+function paragraphs_paste_field_widget_settings_summary_alter(array &$summary, array $context) {
+  if ($context['widget'] instanceof ParagraphsWidget) {
+    if ($context['widget']->getThirdPartySetting('paragraphs_paste', 'enabled')) {
+      $summary[] = t('Paragraphs copy & paste: enabled');
+    }
+  }
+}

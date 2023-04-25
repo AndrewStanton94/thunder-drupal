@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Test functionality.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider;
+use Drupal\vgwort\Api\Webrange;
+
+/**
+ * Implements hook_vgwort_enable_for_entity().
+ */
+function vgwort_test_vgwort_enable_for_entity(EntityInterface $entity): bool {
+  return !in_array($entity->id(), \Drupal::state()->get('vgwort_test_vgwort_enable_for_entity', []), TRUE);
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function vgwort_test_entity_type_alter(array &$entity_types): void {
+  // @todo Remove once minimum support Drupal version is greater or equal to
+  //   10.1. This is fixed by https://drupal.org/i/2350939.
+  if (!empty($entity_types['entity_test_revpub'])) {
+    $route_providers = $entity_types['entity_test_revpub']->getRouteProviderClasses();
+    if (!isset($route_providers['html'])) {
+      $route_providers['html'] = DefaultHtmlRouteProvider::class;
+      $entity_types['entity_test_revpub']->setHandlerClass('route_provider', $route_providers);
+      $entity_types['entity_test_revpub']->setLinkTemplate('canonical', '/entity_test_revpub/manage/{entity_test_revpub}');
+    }
+  }
+}
+
+/**
+ * Implements hook_vgwort_new_message_alter().
+ */
+function vgwort_test_vgwort_new_message_alter(array &$data, EntityInterface $entity): void {
+  if (\Drupal::state()->get('vgwort_test_vgwort_new_message_alter', FALSE)) {
+    $data['without_own_participation'] = TRUE;
+    $data['webranges'] = [new Webrange(['http://decoupled_site.example.com/' . $entity->uuid()])];
+    $data['legal_rights']['other_public_communication'] = TRUE;
+  }
+}

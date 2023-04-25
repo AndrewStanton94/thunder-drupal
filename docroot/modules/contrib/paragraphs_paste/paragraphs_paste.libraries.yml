@@ -1,0 +1,7 @@
+modal:
+  js:
+    js/paragraphs_paste.modal.js: {}
+  dependencies:
+    - core/drupal.dialog
+    - core/drupal.dialog.ajax
+    - core/once

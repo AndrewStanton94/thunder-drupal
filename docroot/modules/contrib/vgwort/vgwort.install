@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for VG Wort module.
+ */
+
+use Drupal\vgwort\EntityJobMapper;
+
+/**
+ * Implements hook_schema().
+ */
+function vgwort_schema(): array {
+  return [EntityJobMapper::TABLE => EntityJobMapper::schemaDefinition()];
+}
+
+/**
+ * Create vgwort_entity_registration table.
+ */
+function vgwort_update_20001(): void {
+  // This will need to change if the schema changes.
+  \Drupal::database()->schema()->createTable(EntityJobMapper::TABLE, EntityJobMapper::schemaDefinition());
+}
+
+/**
+ * Update vgwort.settings:entity_types to comply with the new schema.
+ */
+function vgwort_update_20002(): void {
+  $config = \Drupal::configFactory()->getEditable('vgwort.settings');
+  $old_entity_types = $config->get('entity_types');
+  $new_entity_types = [];
+
+  if (is_array($old_entity_types)) {
+    foreach ($old_entity_types as $entity_type_id) {
+      $new_entity_types[$entity_type_id] = [];
+    }
+  }
+  else {
+    // Replace functionality in vgwort_post_update_add_node_to_entity_types().
+    $new_entity_types['node'] = [];
+  }
+
+  $config->set('entity_types', $new_entity_types)->save();
+}
+
+/**
+ * Update vgwort.settings:entity_types to add view mode info information.
+ */
+function vgwort_update_20003(): void {
+  $config = \Drupal::configFactory()->getEditable('vgwort.settings');
+  $old_entity_types = $config->get('entity_types');
+  $new_entity_types = [];
+
+  foreach ($old_entity_types as $entity_type_id => $fields) {
+    $new_entity_types[$entity_type_id]['view_mode'] = 'full';
+    if (!empty($fields)) {
+      $new_entity_types[$entity_type_id]['fields'] = $fields;
+    }
+  }
+
+  $config->set('entity_types', $new_entity_types)->save();
+}

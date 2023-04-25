@@ -1,0 +1,13 @@
+name: 'Config Selector Profile test'
+type: profile
+core_version_requirement: ^9 || ^10
+hidden: true
+install:
+  - drupal:config_test
+  - config_selector:config_selector
+  - config_selector:config_selector_test_provides_multiple
+
+# Information added by Drupal.org packaging script on 2022-03-29
+version: '8.x-2.2'
+project: 'config_selector'
+datestamp: 1648545222

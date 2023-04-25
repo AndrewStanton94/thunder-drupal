@@ -1,0 +1,3 @@
+extend type Query {
+  ivw(path: String!): Ivw
+}

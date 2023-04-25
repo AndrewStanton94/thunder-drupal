@@ -1,0 +1,18 @@
+services:
+  vgwort.participant_list_manager:
+    class: Drupal\vgwort\ParticipantListManager
+    parent: default_plugin_manager
+  vgwort.config_subscriber:
+    class: Drupal\vgwort\ConfigSubscriber
+    arguments: ['@entity_field.manager', '@vgwort.participant_list_manager']
+    tags:
+      - { name: event_subscriber }
+  vgwort.message_generator:
+    class: Drupal\vgwort\MessageGenerator
+    arguments: ['@vgwort.participant_list_manager', '@entity_type.manager', '@renderer', '@config.factory', '@module_handler']
+  vgwort.entity_queuer:
+    class: Drupal\vgwort\EntityQueuer
+    arguments: ['@config.factory', '@vgwort.entity_job_mapper']
+  vgwort.entity_job_mapper:
+    class: Drupal\vgwort\EntityJobMapper
+    arguments: ['@database']

@@ -1,0 +1,9 @@
+name: 'Autofill'
+type: module
+description: 'A field can automatically be autofilled while typing into another one.'
+core_version_requirement: ^9.2 || ^10
+
+# Information added by Drupal.org packaging script on 2022-02-22
+version: '8.x-1.1'
+project: 'autofill'
+datestamp: 1645527923

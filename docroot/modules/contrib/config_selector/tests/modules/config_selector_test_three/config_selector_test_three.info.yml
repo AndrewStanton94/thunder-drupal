@@ -1,0 +1,10 @@
+name: 'Configuration Selector Test three'
+type: module
+package: Testing
+dependencies:
+  - drupal:config_test
+
+# Information added by Drupal.org packaging script on 2022-03-29
+version: '8.x-2.2'
+project: 'config_selector'
+datestamp: 1648545222

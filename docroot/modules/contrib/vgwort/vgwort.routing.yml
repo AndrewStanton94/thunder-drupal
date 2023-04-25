@@ -1,0 +1,7 @@
+vgwort.settings:
+  path: '/admin/config/system/vgwort'
+  defaults:
+    _form: '\Drupal\vgwort\Form\SettingsForm'
+    _title: 'VG Wort configuration'
+  requirements:
+    _permission: 'administer site configuration'

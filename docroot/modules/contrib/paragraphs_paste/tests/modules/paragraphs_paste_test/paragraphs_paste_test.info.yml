@@ -1,0 +1,15 @@
+name: 'Paragraphs Paste Test'
+type: module
+package: Testing
+dependencies:
+  - media_entity_twitter:media_entity_twitter
+  - paragraphs_paste:paragraphs_paste
+  - drupal:node
+  - drupal:text
+  - drupal:media
+  - drupal:ckeditor5
+
+# Information added by Drupal.org packaging script on 2022-12-01
+version: '2.0.0-beta6'
+project: 'paragraphs_paste'
+datestamp: 1669903206

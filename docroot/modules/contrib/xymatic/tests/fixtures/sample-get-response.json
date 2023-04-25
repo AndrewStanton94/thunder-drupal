@@ -1,0 +1,120 @@
+{
+  "contentId": "cd7d1cefe528096250f5aa6ddef0a176f591ea70",
+  "adsDisallowed": false,
+  "author": "6mCNo51V93OkKAkUNQJL2QufnVz2",
+  "date": "2023-03-10T14:24:10.541Z",
+  "deleted": false,
+  "duration": 14,
+  "enabled": true,
+  "inputVideos": [
+    {
+      "src": "s3://media.raw"
+    }
+  ],
+  "licenseKeys": [
+    "111"
+  ],
+  "modifiedDate": "2023-03-10T14:25:45.988Z",
+  "poster": [
+    {
+      "src": "https://www.drupal.org/files/announcements/drupal-evergreen-logo-280X280px_2.png",
+      "width": 640,
+      "name": "test.png",
+      "format": "DEFAULT",
+      "type": "image/png",
+      "version": 0,
+      "originalFilename": "test.png",
+      "status": "COMPLETE",
+      "height": 360
+    }
+  ],
+  "posterRenditions": [
+    {
+      "completedAt": "2023-03-10T14:24:18.882Z",
+      "src": "https://example.com/media.0000001.jpg",
+      "count": 2,
+      "type": "image/jpeg",
+      "version": 0,
+      "duration": 15,
+      "srcArray": [
+        "https://example.com/media.0000001.jpg",
+        "https://example.com/media.0000001.jpg"
+      ],
+      "size": 7479,
+      "name": "POSTER",
+      "width": 640,
+      "progress": 1,
+      "height": 360,
+      "status": "COMPLETE"
+    }
+  ],
+  "posterType": "CUSTOM_POSTER",
+  "summary": "My awesome summary",
+  "thumbsRenditions": [
+    {
+      "completedAt": "2023-03-10T14:24:18.882Z",
+      "src": "https://example.com/media.0000001.jpg",
+      "count": 2,
+      "type": "image/jpeg",
+      "version": 0,
+      "duration": 15,
+      "srcArray": [
+        "https://example.com/media.0000001.jpg",
+        "https://example.com/media.0000001.jpg"
+      ],
+      "size": 819,
+      "name": "THUMBS",
+      "width": 100,
+      "progress": 1,
+      "height": 56,
+      "status": "COMPLETE"
+    }
+  ],
+  "title": "gin-dialog.mp4",
+  "uid": "6mCNo51V93OkKAkUNQJL2QufnVz2",
+  "userMetadata": {},
+  "videoRenditions": [
+    {
+      "completedAt": "2023-03-10T14:24:18.882Z",
+      "src": "https://example.com/media.mp4",
+      "format": "MONO_FLAT",
+      "type": "video/mp4",
+      "version": 0,
+      "duration": 14,
+      "jobId": "1678458253956-lwrnqi",
+      "size": 494888,
+      "name": "HD",
+      "width": 1280,
+      "progress": 1,
+      "height": 720,
+      "status": "COMPLETE"
+    },
+    {
+      "completedAt": "2023-03-10T14:24:18.882Z",
+      "src": "https://example.com/media.mp4",
+      "format": "MONO_FLAT",
+      "type": "video/mp4",
+      "version": 0,
+      "duration": 14,
+      "jobId": "1678458253956-lwrnqi",
+      "size": 292822,
+      "name": "SD",
+      "width": 640,
+      "progress": 1,
+      "height": 360,
+      "status": "COMPLETE"
+    }
+  ],
+  "inputPosters": [
+    {
+      "size": 248662,
+      "src": "https://example.com/media.png",
+      "width": 2518,
+      "type": "image/png",
+      "version": 0,
+      "originalFilename": "media.png",
+      "height": 940
+    }
+  ],
+  "creatorLicenseKey": "11111"
+}

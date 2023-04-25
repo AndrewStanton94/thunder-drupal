@@ -1,0 +1,152 @@
+field.value.ivw_integration_settings:
+  type: mapping
+  label: 'Default value'
+  mapping:
+    offering:
+      type: string
+      label: 'Offering'
+    language:
+      type: string
+      label: 'Language'
+    frabo:
+      type: string
+      label: 'Frabo'
+    frabo_mobile:
+      type: string
+      label: 'Frabo mobile'
+    format:
+      type: string
+      label: 'Format'
+    creator:
+      type: string
+      label: 'Creator'
+    homepage:
+      type: string
+      label: 'Homepage'
+    delivery:
+      type: string
+      label: 'Delivery'
+    app:
+      type: string
+      label: 'App'
+    paid:
+      type: string
+      label: 'Paid'
+    content:
+      type: string
+      label: 'Content'
+
+ivw_integration.settings:
+  type: config_object
+  label: 'IVW Settings'
+  mapping:
+    site:
+      type: string
+      label: 'IVW site name as used in st parameter'
+    mobile_site:
+      type: string
+      label: 'IVW mobile site name as used in st parameter'
+    service_domain_name:
+      type: string
+      label: 'Domain name for anonymous Measurement Manager.'
+    mobile_service_domain_name:
+      type: string
+      label: 'Mobile domain name for anonymous Measurement Manager.'
+    code_template:
+      type: string
+      label: 'IVW code template'
+    responsive:
+      type: integer
+      label: 'Site is responsive'
+    mobile_width:
+      type: integer
+      label: 'Mobile detection pixel width'
+    defer:
+      type: integer
+      label: 'Deferred script loading'
+    offering_default:
+      type: string
+      label: 'Default code for offering'
+    offering_overridable:
+      type: boolean
+      label: 'Offering setting is overridable'
+    language_default:
+      type: integer
+      label: 'Default language code'
+    language_overridable:
+      type: boolean
+      label: 'Language setting is overridable'
+    format_default:
+      type: integer
+      label: 'Default format code'
+    format_overridable:
+      type: boolean
+      label: 'Format setting is overridable'
+    creator_default:
+      type: integer
+      label: 'Default creator code'
+    creator_overridable:
+      type: boolean
+      label: 'Creator setting is overridable'
+    homepage_default:
+      type: integer
+      label: 'Default homepage code'
+    homepage_overridable:
+      type: boolean
+      label: 'Homepage setting is overridable'
+    delivery_default:
+      type: integer
+      label: 'Default delivery code'
+    delivery_overridable:
+      type: boolean
+      label: 'Delivery setting is overridable'
+    app_default:
+      type: integer
+      label: 'Default app flag'
+    app_overridable:
+      type: boolean
+      label: 'App setting is overridable'
+    paid_default:
+      type: integer
+      label: 'Default paid flag'
+    paid_overridable:
+      type: boolean
+      label: 'Paid setting is overridable'
+    content_default:
+      type: string
+      label: 'Default content code'
+    content_overridable:
+      type: boolean
+      label: 'Content setting is overridable'
+    frabo_default:
+      type: string
+      label: 'Frabo control'
+    frabo_overridable:
+      type: boolean
+      label: 'Frabo control is overridable'
+    frabo_mobile_default:
+      type: string
+      label: 'Frabo control for mobile'
+    frabo_mobile_overridable:
+      type: boolean
+      label: 'Frabo control for mobile is overridable'
+    debug:
+      type: boolean
+      label: 'Activate debugging'
+    pixel_type:
+      type: string
+      label: 'The pixel type'
+    distribution_channel:
+      type: string
+      label: 'The distribution type'
+    legacy_mode:
+      type: boolean
+      label: 'Display legacy code additionally to  measurement manager'
+    bfe:
+      type: boolean
+      label: 'Participate in agof daily digital facts'
+    disabled_languages:
+      type: sequence
+      label: 'Disabled languages'
+      sequence:
+        type: string

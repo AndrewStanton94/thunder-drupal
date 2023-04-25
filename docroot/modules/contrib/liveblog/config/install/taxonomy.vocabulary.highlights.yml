@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - liveblog
+name: Highlights
+vid: highlights
+description: 'Post highlights'
+weight: 0

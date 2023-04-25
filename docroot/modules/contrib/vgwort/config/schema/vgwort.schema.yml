@@ -1,0 +1,101 @@
+vgwort.settings:
+  type: config_object
+  label: 'VG Wort settings'
+  mapping:
+    username:
+      type: string
+      label: 'VG Wort username'
+    password:
+      type: string
+      label: 'VG Wort password'
+    prefix:
+      type: string
+      label: 'Prefix for the counter ID'
+    publisher_id:
+      type: string
+      label: 'Publisher ID (Karteinummer)'
+    image_domain:
+      type: string
+      label: 'Domain to use for counter ID images'
+    registration_wait_days:
+      type: integer
+      label: 'Number of days after publishing to wait to register the content'
+    queue_retry_time:
+      type: integer
+      label: 'Number of seconds to wait to retry a failed queue item'
+    entity_types:
+      label: 'Entity type map'
+      type: sequence
+      orderby: key
+      sequence:
+        label: 'Entity type'
+        type: vgwort.entity_type_info
+    test_mode:
+      label: 'Test mode'
+      type: boolean
+    legal_rights:
+      type: mapping
+      label: 'Legal rights'
+      mapping:
+        distribution:
+          label: 'Distribution right (§ 17 UrhG)'
+          type: boolean
+        public_access:
+          label: 'Right of public access (§ 19a UrhG)'
+          type: boolean
+        reproduction:
+          label: 'Reproduction Rights (§ 16 UrhG)'
+          type: boolean
+        declaration_of_granting:
+          label: 'Declaration of Granting of Rights. The right of reproduction (§ 16 UrhG), right of distribution (§ 17 UrhG), right of public access (§ 19a UrhG) and the declaration of granting rights must be confirmed.'
+          type: boolean
+        other_public_communication:
+          label: 'Other Public Communication Rights (§§ 19, 20, 21, 22 UrhG)'
+          type: boolean
+
+vgwort.entity_type_info:
+  type: mapping
+  label: 'VG Wort entity type info'
+  mapping:
+    view_mode:
+      type: string
+      label: 'View mode to use to generate text for VG Wort'
+    fields:
+      type: sequence
+      orderby: value
+      sequence:
+        label: 'Field name'
+        type: string
+
+field.widget.settings.vgwort_participant_info:
+  type: mapping
+  label: 'VG Wort participant widget settings'
+  mapping:
+    agency_abbr:
+      type: boolean
+      label: 'Allow agency abbreviations'
+
+field.field_settings.vgwort_participant_info:
+  type: mapping
+  label: 'VG Wort participant field settings'
+  mapping:
+    involvement:
+      type: string
+      label: 'Maximum length'
+
+field.value.vgwort_participant_info:
+  type: mapping
+  label: 'Default value'
+  mapping:
+    card_number:
+      type: 'string'
+      label: 'VG Wort card number'
+    agency_abbr:
+      type: 'string'
+      label: 'Agency abbreviation'
+    firstname:
+      type: 'string'
+      label: 'Firstname'
+    surname:
+      type: 'string'
+      label: 'Surname'

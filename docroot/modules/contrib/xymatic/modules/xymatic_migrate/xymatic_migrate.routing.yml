@@ -1,0 +1,8 @@
+xymatic_migrate.settings:
+  path: '/admin/config/media/xymatic-settings/migrate'
+  defaults:
+    _form: '\Drupal\xymatic_migrate\Form\XymaticMigrateSettingsForm'
+    _title: 'Xymatic migrate settings'
+  requirements:
+    _permission: 'administer media'
+

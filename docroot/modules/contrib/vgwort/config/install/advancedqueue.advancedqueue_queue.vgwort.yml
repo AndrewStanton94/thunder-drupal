@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - vgwort
+id: vgwort
+label: 'VG Wort'
+backend: database
+backend_configuration:
+  lease_time: 300
+processor: daemon
+processing_time: 90
+locked: false
+threshold:
+  type: 0
+  limit: 0
+  state: all

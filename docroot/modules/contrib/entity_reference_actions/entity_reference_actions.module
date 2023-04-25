@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * @file
+ * Entity reference actions module hooks.
+ */
+
+use Drupal\Core\Ajax\AjaxHelperTrait;
+use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\WidgetInterface;
+use Drupal\Core\Form\ConfirmFormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\entity_reference_actions\EntityReferenceActionsHandler;
+
+/**
+ * Implements hook_field_widget_complete_form_alter().
+ */
+function entity_reference_actions_field_widget_complete_form_alter(&$element, FormStateInterface $form_state, $context) {
+  /** @var \Drupal\Core\Field\FieldDefinitionInterface $field_definition */
+  $field_definition = $context['items']->getFieldDefinition();
+
+  if (is_a($field_definition->getClass(), EntityReferenceFieldItemListInterface::class, TRUE)) {
+    $handler = \Drupal::classResolver(EntityReferenceActionsHandler::class);
+    $entity_type = $field_definition->getSettings()['target_type'];
+
+    /** @var \Drupal\Core\Field\WidgetInterface $widget */
+    $widget = $context['widget'];
+
+    $handler->init($entity_type, $widget->getThirdPartySettings('entity_reference_actions'));
+    $handler->formAlter($element, $form_state, $context);
+  }
+}
+
+/**
+ * Implements hook_field_widget_third_party_settings_form().
+ */
+function entity_reference_actions_field_widget_third_party_settings_form(WidgetInterface $plugin, FieldDefinitionInterface $field_definition, $form_mode, $form, FormStateInterface $form_state) {
+  $element = [];
+  if (is_a($field_definition->getClass(), EntityReferenceFieldItemListInterface::class, TRUE)) {
+    $handler = \Drupal::classResolver(EntityReferenceActionsHandler::class);
+    $entity_type = $field_definition->getSettings()['target_type'];
+
+    $handler->init($entity_type, $plugin->getThirdPartySettings('entity_reference_actions'));
+    $handler->buildSettingsForm($element, $form_state, $field_definition->getName());
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_field_widget_settings_summary_alter().
+ */
+function entity_reference_actions_field_widget_settings_summary_alter(&$summary, $context) {
+  /** @var \Drupal\Core\Field\FieldDefinitionInterface $field_definition */
+  $field_definition = $context['field_definition'];
+
+  if (is_a($field_definition->getClass(), EntityReferenceFieldItemListInterface::class, TRUE)) {
+    $enabled = $context['widget']->getThirdPartySetting('entity_reference_actions', 'enabled');
+    $summary[] = 'Entity Reference Actions: ' . ($enabled ? 'On' : 'Off');
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function entity_reference_actions_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  $ajax_class = new class() {
+    use AjaxHelperTrait { isAjax as public; }
+  };
+
+  if (!$ajax_class->isAjax() || !($form_state->getFormObject() instanceof ConfirmFormBase)) {
+    return;
+  }
+
+  if (empty($form['actions']['submit']['#ajax']['callback'])) {
+    $form['actions']['submit']['#ajax']['callback'] = [
+      EntityReferenceActionsHandler::class,
+      'dialogAjaxSubmit',
+    ];
+    $form['actions']['cancel']['#attributes']['class'][] = 'dialog-cancel';
+  }
+}

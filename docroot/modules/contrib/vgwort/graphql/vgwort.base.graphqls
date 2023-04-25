@@ -1,0 +1,5 @@
+type VgWort {
+  counterId: String!
+  url: String!
+  rendered: String!
+}

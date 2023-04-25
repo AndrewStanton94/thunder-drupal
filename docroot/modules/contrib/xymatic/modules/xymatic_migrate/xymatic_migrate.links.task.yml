@@ -1,0 +1,6 @@
+xymatic_migrate.settings:
+  route_name: xymatic_migrate.settings
+  title: 'Migration'
+  base_route: xymatic.settings
+  weight: 1
+

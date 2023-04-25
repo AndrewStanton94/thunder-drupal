@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_ivw_settings
+    - taxonomy.vocabulary.ivw_taxonomy
+  module:
+    - ivw_integration
+id: taxonomy_term.ivw_taxonomy.field_ivw_settings
+field_name: field_ivw_settings
+entity_type: taxonomy_term
+bundle: ivw_taxonomy
+label: 'ivw settings'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: ivw_integration_settings

@@ -1,0 +1,5 @@
+services:
+  xymatic.migrate:
+    class: Drupal\xymatic_migrate\MigrateService
+    arguments: ['@entity_type.manager', '@config.factory', '@logger.factory']
+

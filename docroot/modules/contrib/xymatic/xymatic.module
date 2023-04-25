@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for the xymatic module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\xymatic\Plugin\media\Source\Xymatic;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function xymatic_form_media_type_edit_form_alter(&$form, FormStateInterface $form_state) {
+  /** @var \Drupal\media\MediaTypeInterface $media_type */
+  $media_type = $form_state->get('type');
+  if ($media_type->getSource() instanceof Xymatic) {
+    foreach (Element::children($form["source_dependent"]["field_map"]) as $attribute) {
+      if (isset($form["source_dependent"]["field_map"][$attribute]['#type']) && $form["source_dependent"]["field_map"][$attribute]['#type'] === 'select') {
+        $form["source_dependent"]["field_map"][$attribute]['#options']['status'] = t('Published');
+        $form["source_dependent"]["field_map"][$attribute]['#options']['thumbnail'] = t('Thumbnail');
+      }
+    }
+  }
+}

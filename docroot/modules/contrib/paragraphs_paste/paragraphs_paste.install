@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the paragraphs_paste module.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function paragraphs_paste_requirements(string $phase): array {
+  $requirements = [];
+  if ($phase === 'runtime') {
+    if (!class_exists('\Netcarver\Textile\Parser')) {
+      $requirements['paragtaphs_paste'] = [
+        'title' => t('Paragraphs paste'),
+        'severity' => REQUIREMENT_WARNING,
+        'description' => t('The netcarver/textile library for PHP is required for text import. It is set as a composer dependency, but could not be found.'),
+      ];
+    }
+  }
+  return $requirements;
+}

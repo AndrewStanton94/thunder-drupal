@@ -1,0 +1,18 @@
+xymatic.settings:
+  path: '/admin/config/media/xymatic-settings'
+  defaults:
+    _form: '\Drupal\xymatic\Form\XymaticSettingsForm'
+    _title: 'Xymatic settings'
+  requirements:
+    _permission: 'administer media'
+
+xymatic.webhook:
+  path: '/xymatic/webhook'
+  defaults:
+    _controller: '\Drupal\xymatic\Controller\XymaticWebhookController::handle'
+    _title: 'Xymatic webhook'
+  methods:
+    - POST
+  requirements:
+    _access: 'TRUE'
+    _format: 'json'

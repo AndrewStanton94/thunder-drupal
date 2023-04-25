@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for the xymatic_migrate module.
+ */
+
+use Drupal\media\MediaInterface;
+
+/**
+ * Implements hook_xymatic_webhook().
+ */
+function xymatic_migrate_xymatic_webhook(MediaInterface $media, array $requestBody) {
+
+  \Drupal::service('xymatic.migrate')->migrate($media, $requestBody);
+}

@@ -1,0 +1,79 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.ivw_test.field_a
+    - field.field.node.ivw_test.field_ivw_settings
+    - field.field.node.ivw_test.field_z
+    - node.type.ivw_test
+  module:
+    - ivw_integration
+id: node.ivw_test.default
+targetEntityType: node
+bundle: ivw_test
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_a:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_ivw_settings:
+    type: ivw_integration_widget
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_z:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 3
+    region: content
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 4
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+hidden: {  }

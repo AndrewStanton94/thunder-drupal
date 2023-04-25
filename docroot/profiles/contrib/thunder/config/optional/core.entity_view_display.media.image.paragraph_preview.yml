@@ -1,0 +1,62 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.paragraph_preview
+    - field.field.media.image.field_copyright
+    - field.field.media.image.field_description
+    - field.field.media.image.field_expires
+    - field.field.media.image.field_image
+    - field.field.media.image.field_source
+    - field.field.media.image.field_tags
+    - image.style.paragraph_preview_thumbnail
+    - media.type.image
+  module:
+    - image
+id: media.image.paragraph_preview
+targetEntityType: media
+bundle: image
+mode: paragraph_preview
+content:
+  field_copyright:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      empty_fields:
+        handler: nbsp
+    weight: 2
+    region: content
+  field_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: paragraph_preview_thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  created: true
+  field_brands: true
+  field_channel: true
+  field_description: true
+  field_events: true
+  field_expires: true
+  field_people: true
+  field_source: true
+  field_tags: true
+  langcode: true
+  thumbnail: true
+  uid: true

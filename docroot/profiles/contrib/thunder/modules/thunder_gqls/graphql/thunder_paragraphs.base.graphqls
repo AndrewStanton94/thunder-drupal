@@ -1,0 +1,64 @@
+interface Paragraph {
+  summary: [String]
+}
+
+type ParagraphImage implements Paragraph {
+  summary: [String]
+
+  image: MediaImage
+}
+
+type ParagraphTwitter implements Paragraph {
+  summary: [String]
+
+  provider: String
+  url: String
+}
+
+type ParagraphInstagram implements Paragraph {
+  summary: [String]
+
+  provider: String
+  url: String
+}
+
+type ParagraphPinterest implements Paragraph {
+  summary: [String]
+
+  provider: String
+  url: String
+}
+
+type ParagraphText implements Paragraph {
+  summary: [String]
+
+  text: String
+}
+
+type ParagraphGallery implements Paragraph {
+  summary: [String]
+
+  name: String!
+  images: [MediaImage]
+}
+
+type ParagraphLink implements Paragraph {
+  summary: [String]
+
+  links: [Link]
+}
+
+type ParagraphVideo implements Paragraph {
+  summary: [String]
+
+  provider: String
+  url: String
+  video: MediaVideo
+  reference: String
+}
+
+type ParagraphQuote implements Paragraph {
+  summary: [String]
+
+  text: String
+}

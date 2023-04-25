@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.paragraph_preview
+    - field.field.media.instagram.field_author
+    - field.field.media.instagram.field_content
+    - field.field.media.instagram.field_url
+    - image.style.paragraph_preview_thumbnail
+    - media.type.instagram
+  module:
+    - empty_fields
+    - image
+id: media.instagram.paragraph_preview
+targetEntityType: media
+bundle: instagram
+mode: paragraph_preview
+content:
+  field_author:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    weight: 1
+    region: content
+  field_content:
+    type: basic_string
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: paragraph_preview_thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_url: true
+  langcode: true
+  name: true
+  uid: true

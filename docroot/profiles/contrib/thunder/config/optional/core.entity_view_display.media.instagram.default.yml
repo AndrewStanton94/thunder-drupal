@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.instagram.field_author
+    - field.field.media.instagram.field_content
+    - field.field.media.instagram.field_url
+    - media.type.instagram
+  module:
+    - empty_fields
+    - media_entity_instagram
+id: media.instagram.default
+targetEntityType: media
+bundle: instagram
+mode: default
+content:
+  field_url:
+    type: instagram_embed
+    label: hidden
+    settings:
+      max_width: 0
+    third_party_settings:
+      empty_fields:
+        handler: ''
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_author: true
+  field_content: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

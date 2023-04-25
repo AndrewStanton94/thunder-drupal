@@ -1,0 +1,9 @@
+- name: DO NOT MERGE
+  description: It's prohibited to merge this branch
+  color: ff425e
+- name: test-min
+  description: Triggers the minimum requirements testing
+  color: c9f9a9
+- name: test-upgrade
+  description: Triggers the upgrade path testing
+  color: 8e36db

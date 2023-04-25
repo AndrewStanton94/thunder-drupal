@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.paragraph_preview
+    - field.field.media.gallery.field_media_images
+    - image.style.paragraph_preview_thumbnail
+    - media.type.gallery
+  module:
+    - media
+id: media.gallery.paragraph_preview
+targetEntityType: media
+bundle: gallery
+mode: paragraph_preview
+content:
+  field_media_images:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: paragraph_preview_thumbnail
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  created: true
+  langcode: true
+  thumbnail: true
+  uid: true

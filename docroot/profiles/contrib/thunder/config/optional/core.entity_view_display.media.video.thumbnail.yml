@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.thumbnail
+    - field.field.media.video.field_author
+    - field.field.media.video.field_caption
+    - field.field.media.video.field_copyright
+    - field.field.media.video.field_description
+    - field.field.media.video.field_media_video_embed_field
+    - field.field.media.video.field_source
+    - media.type.video
+  module:
+    - media
+id: media.video.thumbnail
+targetEntityType: media
+bundle: video
+mode: thumbnail
+content:
+  field_media_video_embed_field:
+    type: oembed
+    label: hidden
+    settings:
+      max_width: 241
+      max_height: 138
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_author: true
+  field_caption: true
+  field_copyright: true
+  field_description: true
+  field_source: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

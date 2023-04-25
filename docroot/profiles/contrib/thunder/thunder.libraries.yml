@@ -1,0 +1,9 @@
+toolbar.icon:
+  css:
+    theme:
+      css/toolbar.css: {}
+
+module.configure.form:
+  css:
+    theme:
+      css/module-configure-form.css: {}

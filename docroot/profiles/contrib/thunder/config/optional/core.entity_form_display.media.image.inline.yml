@@ -1,0 +1,163 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.inline
+    - field.field.media.image.field_copyright
+    - field.field.media.image.field_description
+    - field.field.media.image.field_expires
+    - field.field.media.image.field_image
+    - field.field.media.image.field_source
+    - field.field.media.image.field_tags
+    - image.style.medium
+    - media.type.image
+  module:
+    - datetime
+    - field_group
+    - focal_point
+    - text
+third_party_settings:
+  field_group:
+    group_left:
+      children:
+        - field_image
+      label: Left
+      region: content
+      parent_name: group_wrapper
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: left
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        required_fields: true
+    group_right:
+      children:
+        - name
+        - field_source
+        - field_expires
+        - field_copyright
+      label: Right
+      region: content
+      parent_name: group_wrapper
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: right
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        required_fields: true
+    group_bottom:
+      children:
+        - field_description
+      label: Bottom
+      region: content
+      parent_name: ''
+      weight: 3
+      format_type: html_element
+      format_settings:
+        label: Bottom
+        classes: bottom
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        required_fields: true
+    group_wrapper:
+      children:
+        - group_left
+        - group_right
+      label: Wrapper
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: column-container
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        required_fields: true
+id: media.image.inline
+targetEntityType: media
+bundle: image
+mode: inline
+content:
+  field_copyright:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_description:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_expires:
+    type: datetime_default
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_image:
+    type: image_focal_point
+    weight: 2
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: medium
+      preview_link: true
+      offsets: '50,50'
+    third_party_settings: {  }
+  field_source:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_tags: true
+  langcode: true
+  moderation_state: true
+  path: true
+  publish_on: true
+  publish_state: true
+  scheduler_settings: true
+  status: true
+  uid: true
+  unpublish_on: true
+  unpublish_state: true

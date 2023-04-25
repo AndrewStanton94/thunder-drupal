@@ -1,0 +1,58 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.paragraph_preview
+    - field.field.media.video.field_author
+    - field.field.media.video.field_caption
+    - field.field.media.video.field_copyright
+    - field.field.media.video.field_description
+    - field.field.media.video.field_media_video_embed_field
+    - field.field.media.video.field_source
+    - image.style.paragraph_preview_thumbnail
+    - media.type.video
+  module:
+    - image
+id: media.video.paragraph_preview
+targetEntityType: media
+bundle: video
+mode: paragraph_preview
+content:
+  field_copyright:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      empty_fields:
+        handler: nbsp
+    weight: 2
+    region: content
+  name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: paragraph_preview_thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_author: true
+  field_caption: true
+  field_description: true
+  field_media_video_embed_field: true
+  field_source: true
+  langcode: true
+  uid: true

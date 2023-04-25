@@ -1,0 +1,11 @@
+/.idea
+/vendor
+/node_modules
+/docroot
+/libraries
+.DS_Store
+composer.lock
+phpunit.xml
+.phpunit.result.cache
+.temp
+.cache

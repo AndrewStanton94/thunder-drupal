@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c11c66f1b50f5f4dbcedec4d5d4bb3ca7e6e11d2',
+        'reference' => 'e36a6c6ac6f64cbbf63491a86f4dfedced3eca4c',
         'name' => 'thunder/thunder-project',
         'dev' => true,
     ),
@@ -326,12 +326,12 @@
             'dev_requirement' => false,
         ),
         'drupal/admin_toolbar' => array(
-            'pretty_version' => '3.3.0',
-            'version' => '3.3.0.0',
+            'pretty_version' => '3.3.1',
+            'version' => '3.3.1.0',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../docroot/modules/contrib/admin_toolbar',
             'aliases' => array(),
-            'reference' => '3.3.0',
+            'reference' => '3.3.1',
             'dev_requirement' => false,
         ),
         'drupal/adsense' => array(
@@ -1268,12 +1268,12 @@
             'dev_requirement' => false,
         ),
         'masterminds/html5' => array(
-            'pretty_version' => '2.7.6',
-            'version' => '2.7.6.0',
+            'pretty_version' => '2.8.0',
+            'version' => '2.8.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../masterminds/html5',
             'aliases' => array(),
-            'reference' => '897eb517a343a2281f11bc5556d6548db7d93947',
+            'reference' => '3c5d5a56d56f48a1ca08a0670f0f80c1dad368f3',
             'dev_requirement' => false,
         ),
         'mikey179/vfsstream' => array(
@@ -1433,12 +1433,12 @@
             'dev_requirement' => false,
         ),
         'paragonie/sodium_compat' => array(
-            'pretty_version' => 'v1.19.0',
-            'version' => '1.19.0.0',
+            'pretty_version' => 'v1.20.0',
+            'version' => '1.20.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../paragonie/sodium_compat',
             'aliases' => array(),
-            'reference' => 'cb15e403ecbe6a6cc515f855c310eb6b1872a933',
+            'reference' => 'e592a3e06d1fa0d43988c7c7d9948ca836f644b6',
             'dev_requirement' => false,
         ),
         'pear/archive_tar' => array(
@@ -1532,12 +1532,12 @@
             'dev_requirement' => true,
         ),
         'phpstan/phpdoc-parser' => array(
-            'pretty_version' => '1.20.2',
-            'version' => '1.20.2.0',
+            'pretty_version' => '1.20.3',
+            'version' => '1.20.3.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpstan/phpdoc-parser',
             'aliases' => array(),
-            'reference' => '90490bd8fd8530a272043c4950c180b6d0cf5f81',
+            'reference' => '6c04009f6cae6eda2f040745b6b846080ef069c2',
             'dev_requirement' => true,
         ),
         'phpunit/php-code-coverage' => array(
@@ -1615,8 +1615,8 @@
         'psr/container-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0',
-                1 => '^1.0',
+                0 => '^1.0',
+                1 => '1.0',
             ),
         ),
         'psr/event-dispatcher-implementation' => array(
@@ -2106,12 +2106,12 @@
             'dev_requirement' => false,
         ),
         'symfony/phpunit-bridge' => array(
-            'pretty_version' => 'v5.4.21',
-            'version' => '5.4.21.0',
+            'pretty_version' => 'v5.4.23',
+            'version' => '5.4.23.0',
             'type' => 'symfony-bridge',
             'install_path' => __DIR__ . '/../symfony/phpunit-bridge',
             'aliases' => array(),
-            'reference' => '28d8a15a0b4c7186042fa4e0ddea94d561e7ea9e',
+            'reference' => '1572c5b7cad812bdf0414d89a32a33a2dafb38ba',
             'dev_requirement' => true,
         ),
         'symfony/polyfill-ctype' => array(
@@ -2271,12 +2271,12 @@
             'dev_requirement' => false,
         ),
         'symfony/var-dumper' => array(
-            'pretty_version' => 'v5.4.22',
-            'version' => '5.4.22.0',
+            'pretty_version' => 'v5.4.23',
+            'version' => '5.4.23.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/var-dumper',
             'aliases' => array(),
-            'reference' => 'e2edac9ce47e6df07e38143c7cfa6bdbc1a6dcc4',
+            'reference' => '9a8a5b6d6508928174ded2109e29328a55342a42',
             'dev_requirement' => false,
         ),
         'symfony/yaml' => array(
@@ -2312,7 +2312,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c11c66f1b50f5f4dbcedec4d5d4bb3ca7e6e11d2',
+            'reference' => 'e36a6c6ac6f64cbbf63491a86f4dfedced3eca4c',
             'dev_requirement' => false,
         ),
         'thunder/thunder_gqls' => array(

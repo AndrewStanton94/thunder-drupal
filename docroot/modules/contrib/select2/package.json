@@ -28,7 +28,7 @@
     "postcss-custom-properties": "^10.0.0",
     "postcss-discard-comments": "^4.0.2",
     "sass": "^1.42.1",
-    "stylelint": "^13.13.1",
+    "stylelint": "^15.10.1",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-scss": "^3.21.0"
   },
